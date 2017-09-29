@@ -1,0 +1,33 @@
+---
+driver:
+        name: gce
+        project: chef-learning-174217 
+        zone: us-central1-a   
+        email: tpass4567@gmail.com
+        #name: vagrant
+
+provisioner:
+        name: chef_zero
+
+verifier:
+        name: inspec
+
+transport:
+        username: tpass4567
+        ssh_key: ~/.ssh/google_compute_engine
+
+platforms:
+- name: centos-7
+  driver:
+                image_project: centos-cloud
+                image_name: centos-7-v20170918
+
+suites:
+- name: default
+  run_list:
+        - recipe[tomcat::default]
+  verifier:
+  inspec_tests:
+        - test/integration/default
+  attributes:
+
